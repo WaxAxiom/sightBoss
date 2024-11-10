@@ -33,12 +33,12 @@ DEPEND=gcc -MM -MG -MF
 CFLAGS = -Wall -I. -I$(PATHU) -I$(PATHS) -DTEST
 
 # Define source files
-SRCS = $(PATHS)SightBoss.c
+SRCS = $(PATHS)sight_boss.c
 EXTRA_SRCS = $(wildcard $(PATHS)*.c)
-EXTRA_OBJS = $(filter-out $(PATHO)SightBoss.o, $(EXTRA_SRCS:$(PATHS)%.c=$(PATHO)%.o))
+EXTRA_OBJS = $(filter-out $(PATHO)sight_boss.o, $(EXTRA_SRCS:$(PATHS)%.c=$(PATHO)%.o))
 
 OBJS = $(SRCS:$(PATHS)%.c=$(PATHO)%.o) $(EXTRA_OBJS)
-TARGETS = $(PATHB)SightBoss.$(TARGET_EXTENSION)
+TARGETS = $(PATHB)sight_boss.$(TARGET_EXTENSION)
 
 src: $(TARGETS) test
 
@@ -52,7 +52,7 @@ SRCT = $(wildcard $(PATHT)*.c)
 
 CFLAGS=-I. -I$(PATHU) -I$(PATHS) -DTEST
 
-RESULTS = $(patsubst $(PATHT)Test%.c,$(PATHR)Test%.txt,$(SRCT) )
+RESULTS = $(patsubst $(PATHT)test_%.c,$(PATHR)test_%.txt,$(SRCT) )
 
 PASSED = `grep -s PASS $(PATHR)*.txt`
 FAIL = `grep -s FAIL $(PATHR)*.txt`
@@ -70,7 +70,7 @@ test: $(BUILD_PATHS) $(RESULTS)
 $(PATHR)%.txt: $(PATHB)%.$(TARGET_EXTENSION)
 	-./$< > $@ 2>&1
 
-$(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(PATHO)%.o $(PATHO)unity.o #$(PATHD)Test%.d
+$(PATHB)test_%.$(TARGET_EXTENSION): $(PATHO)test_%.o $(PATHO)%.o $(PATHO)unity.o #$(PATHD)test_%.d
 	$(LINK) -o $@ $^
 
 $(PATHO)%.o:: $(PATHT)%.c
@@ -102,7 +102,7 @@ clean:
 	$(CLEANUP) $(PATHB)*.$(TARGET_EXTENSION)
 	$(CLEANUP) $(PATHR)*.txt
 
-.PRECIOUS: $(PATHB)Test%.$(TARGET_EXTENSION)
+.PRECIOUS: $(PATHB)test_%.$(TARGET_EXTENSION)
 .PRECIOUS: $(PATHD)%.d
 .PRECIOUS: $(PATHO)%.o
 .PRECIOUS: $(PATHR)%.txt
