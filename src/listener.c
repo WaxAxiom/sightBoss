@@ -1,7 +1,3 @@
-#include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "../include/listener.h"
 
 boardState_t* initMap(int MapSize)
