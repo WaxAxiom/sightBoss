@@ -4,7 +4,7 @@
 typedef struct
 {
     int mapSize;
-    char* map[];
+    char *map[];
 } boardState_t;
 
 boardState_t* initMap(int MapSize);
