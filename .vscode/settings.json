@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.txt": "plaintext",
-        "listener.h": "c"
+        "listener.h": "c",
+        "scenario.h": "c"
     }
 }
